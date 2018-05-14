@@ -25,13 +25,13 @@ public class Controller {
     }
 
     public Team getTeam() {
-//      return team.findById(loggedUser().getTeamId());
-        return null;
+        return team.findById(loggedUser().getTeamId());
+        //return null;
     }
 
-    public int getTeamId () {
-//        return loggedUser().getTeamId();
-        return 0;
+    public long getTeamId () {
+        return loggedUser().getTeamId();
+        //return 0;
     }
 
 }

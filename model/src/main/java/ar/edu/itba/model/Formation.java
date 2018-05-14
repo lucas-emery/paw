@@ -96,6 +96,50 @@ public class Formation {
         starters.put(p2,position);
     }
 
+    //Solo sirve para 442 por ahora
+    public String getPlayerPosition(long playerId) {
+
+        if(startersIds.containsKey(playerId)) {
+            switch (startersIds.get(playerId).getY()) {
+                case 0://Arquero
+                    return "GK";
+                case 1://Defensor
+                    switch (startersIds.get(playerId).getX()) {
+                        case 0:
+                            return "LB";
+                        case 1:
+                            return "LCB";
+                        case 2:
+                            return "RCB";
+                        case 3:
+                            return "RB";
+                    }
+                case 2://Volante
+                    switch (startersIds.get(playerId).getX()) {
+                        case 0:
+                            return "LM";
+                        case 1:
+                            return "LCM";
+                        case 2:
+                            return "RCM";
+                        case 3:
+                            return "RM";
+                    }
+                case 3://Delantero
+                    switch (startersIds.get(playerId).getX()) {
+                        case 0:
+                            return "LF";
+                        case 1:
+                            return "RF";
+                    }
+            }
+        }
+        else if(substitutesIds.contains(playerId)) {
+            return "SUB";
+        }
+        return "RES";
+    }
+
     public Map<Player, Point> getStarters() {
         return starters;
     }

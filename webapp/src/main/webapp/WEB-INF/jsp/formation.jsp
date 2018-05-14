@@ -38,7 +38,9 @@
                     </div>
                     <div class="col">
                         <select class="form-control">
-                            <option>Perez</option>
+                            <c:forEach items="${formation.starters.keySet()}" var="player">
+                                <option><c:out value="${player.name}"/></option>
+                            </c:forEach>
                         </select>
                     </div>
 
@@ -51,7 +53,9 @@
                     </div>
                     <div class="col">
                         <select class="form-control">
-                            <option>Perez</option>
+                            <c:forEach items="${formation.starters.keySet()}" var="player">
+                                <option><c:out value="${player.name}"/></option>
+                            </c:forEach>
                         </select>
                     </div>
 
@@ -60,7 +64,9 @@
                     </div>
                     <div class="col">
                         <select class="form-control">
-                            <option>Perez</option>
+                            <c:forEach items="${formation.starters.keySet()}" var="player">
+                                <option><c:out value="${player.name}"/></option>
+                            </c:forEach>
                         </select>
                     </div>
 
@@ -115,16 +121,16 @@
                     </thead>
 
                     <tbody>
-                    <c:forEach var = "i" begin = "1" end = "23">
+                    <c:forEach items="${players}" var="player">
                         <tr>
-                            <td>Forward</td>
-                            <td>Perez</td>
-                            <td>100</td>
-                            <td>80</td>
-                            <td>0</td>
-                            <td>80</td>
-                            <td>40</td>
-                            <td>70</td>
+                            <td><c:out value="${formation.getPlayerPosition(player.id)}"/></td>
+                            <td><c:out value="${player.name}"/></td>
+                            <td><c:out value="${player.fitness}"/></td>
+                            <td><c:out value="${player.skillLevel}"/></td>
+                            <td><c:out value="${player.goalKeeping}"/></td>
+                            <td><c:out value="${player.finish}"/></td>
+                            <td><c:out value="${player.defending}"/></td>
+                            <td><c:out value="${player.passing}"/></td>
                         </tr>
                     </c:forEach>
                     </tbody>
