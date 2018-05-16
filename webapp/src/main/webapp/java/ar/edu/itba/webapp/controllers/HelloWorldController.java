@@ -46,7 +46,7 @@ public class HelloWorldController extends Controller{
         if (errors.hasErrors()) {
             return index(form);
         }
-        final User u = us.create(form.getUsername(), form.getPassword(), "", new GregorianCalendar(2018,0,1).getTime());
+        final User u = us.create(form.getUsername(), form.getPassword(), "", new Date());
         return new ModelAndView("redirect:/login");
     }
 

@@ -1,6 +1,7 @@
 package ar.edu.itba.services;
 
 import ar.edu.itba.interfaces.dao.*;
+import ar.edu.itba.interfaces.service.FixtureService;
 import ar.edu.itba.interfaces.service.LeagueService;
 import ar.edu.itba.interfaces.service.UserService;
 import ar.edu.itba.model.*;
@@ -12,6 +13,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -29,6 +31,8 @@ public class UserServiceImpl implements UserService {
     private TeamDao teamDao;
     @Autowired
     private LeagueService leagueService;
+    @Autowired
+    private FixtureService fixtureService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -45,7 +49,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(String username, String password, String mail, Date currentDay) {
-        return userDao.create(username, passwordEncoder.encode(password), mail, currentDay);
+        User us = userDao.create(username, passwordEncoder.encode(password), mail, currentDay);
+        fillFixture(leagueDao.findById(us.getId()), currentDay);
+        return us;
     }
 
     @Override
@@ -93,8 +99,21 @@ public class UserServiceImpl implements UserService {
                     team.addMoney(amount);
                 }
             }
+
         }
         userDao.save(user);
+    }
+
+    private void fillFixture(League league, Date newDate){
+
+        Map<Date,List<Match>> map = fixtureService.generateFixture(league, newDate);
+        for(Map.Entry entry : map.entrySet()){
+            Date day = (Date) entry.getKey();
+            for(Match match : (List<Match>) entry.getValue()){
+                matchDao.create(league,match.getHome(),match.getAway(),day);
+            }
+        }
+        league.setFixture(map);
     }
 
     private void subtractPlayerSalaries(Team team) {

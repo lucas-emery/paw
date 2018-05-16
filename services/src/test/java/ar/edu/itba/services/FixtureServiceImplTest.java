@@ -73,7 +73,6 @@ public class FixtureServiceImplTest {
     @Test
     public void generateFixtureTest() {
         Map<Date,List<Match>> map = fixtureService.generateFixture(league,from);
-        assertTrue(map.size() == 20);
 
         int count = 0;
         Team t1 = teams.get(0);
@@ -84,7 +83,6 @@ public class FixtureServiceImplTest {
             }
         }
 
-        System.out.println(count);
         assertTrue(count == 38);
     }
 }

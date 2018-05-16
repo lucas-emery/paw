@@ -130,7 +130,7 @@ INSERT INTO team (name, fanCount, fanTrust, boardTrust, league, money) SELECT DI
 INSERT INTO stadium (name, lowClass, lowClassPrice, mediumClass, mediumClassPrice, highClass, highClassPrice, team) SELECT DISTINCT stadiumName, stadiumLowClass,stadiumLowClassPrice, stadiumMediumClass, stadiumMediumClassPrice, stadiumHighClass, stadiumHighClassPrice, teamid FROM playertmp JOIN league ON ? = userid JOIN team ON teamname = team.name AND league.leagueid = team.league;
 INSERT INTO player (team, name, age, fitness, value, potential, skilllevel, goalkeeping, defending, passing, finishing, salary, contractExpiration) SELECT DISTINCT team.teamid, playername, playerage, playerfitness, playervalue, playerpotential, playerskillLevel, playergoalkeeping, playerdefending, playerpassing, playerfinishing, playersalary, playercontractExpiration FROM playertmp a JOIN league ON ? = userid JOIN team ON team.name = a.teamname AND leagueid = team.league;
 
-
+/*
 CREATE TABLE IF NOT EXISTS matchtmp(
     id        SERIAL PRIMARY KEY
   ,day        DATE  NOT NULL
@@ -150,5 +150,5 @@ INSERT INTO matchtmp(day,homename,awayname,leaguename) VALUES ('2018-01-22','Rac
 
 INSERT INTO match (day, home, away, league) SELECT DISTINCT day, t1.teamid, t2.teamid, league.leagueid FROM matchtmp a JOIN team t1 ON t1.name = a.homename JOIN team t2 ON t2.name = a.awayname JOIN league ON league.name = a.leaguename AND userid = ? AND t1.league = league.leagueid AND t2.league = league.leagueid;
 
-DROP TABLE matchtmp;
+DROP TABLE matchtmp;*/
 DROP TABLE playertmp;
