@@ -4,6 +4,7 @@ import ar.edu.itba.interfaces.dao.LeagueDao;
 import ar.edu.itba.interfaces.dao.MatchDao;
 import ar.edu.itba.interfaces.dao.TeamDao;
 import ar.edu.itba.interfaces.service.LeagueService;
+import ar.edu.itba.interfaces.service.MatchService;
 import ar.edu.itba.model.League;
 import ar.edu.itba.model.Match;
 import ar.edu.itba.model.Team;
@@ -40,6 +41,11 @@ public class LeagueServiceTest {
         @Bean
         public MatchDao matchDao() {
             return mock(MatchDao.class);
+        }
+
+        @Bean
+        public MatchService matchService() {
+            return mock(MatchService.class);
         }
 
         @Bean
