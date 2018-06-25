@@ -94,7 +94,8 @@ public class AiServiceImpl implements AiService {
 
         Player.Position toChange = Player.Position.values()[worstIndex];
         Player bestPlayer = bestPlayerForSale(teams, toChange, team.getMoney(), worst);
-        transferService.transferPlayer(team, bestPlayer.getTeam(), bestPlayer);
+        if(bestPlayer != null)
+            transferService.transferPlayer(team, bestPlayer.getTeam(), bestPlayer);
     }
 
     private Player bestPlayerForSale(List<Team> teams, Player.Position position, int money, int avgInPosition){
