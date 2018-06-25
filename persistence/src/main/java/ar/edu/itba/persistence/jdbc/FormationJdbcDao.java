@@ -174,7 +174,6 @@ public class FormationJdbcDao{
         return new Formation(formationId.longValue(), captain, freeKickTaker, penaltyTaker, starters, substitutes, pressure, attitude);
     }
 
-    @Override
     public Formation save(Formation formation) {
         long formationId = formation.getId();
 

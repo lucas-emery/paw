@@ -1,7 +1,12 @@
 package ar.edu.itba.model;
 
+import javafx.geometry.Pos;
+
 import javax.persistence.*;
 import java.util.Date;
+
+import static ar.edu.itba.model.Player.Position.FW;
+import static ar.edu.itba.model.Player.Position.MID;
 
 @Entity
 @Table(name = "player")
@@ -226,21 +231,22 @@ public class Player {
         age++;
     }
 
-    public int getPosition() {
-        int pos = 0, maxAttribute = 0;
+    public Position getPosition() {
+        Position pos = Position.GK;
+        int maxAttribute = 0;
         if(goalKeeping > maxAttribute) {
             maxAttribute = goalKeeping;
         }
         if(defending > maxAttribute) {
             maxAttribute = defending;
-            pos++;
+            pos = Position.DEF;
         }
         if(passing > maxAttribute) {
             maxAttribute = passing;
-            pos++;
+            pos = MID;
         }
         if(finishing > maxAttribute) {
-            pos++;
+            pos = FW;
         }
         return pos;
     }

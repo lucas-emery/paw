@@ -117,6 +117,14 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
+    public boolean isPlayerForSale(Team team, Player player) {
+        team = findByIdAndFetchPlayersAndFinance(team.getId());
+        if(team.getPlayers().size() < 21)
+            return false;
+        return true;
+    }
+
+    @Override
     public void setPlayers(Team team) {
         if(team != null){
             team.getPlayers().size();

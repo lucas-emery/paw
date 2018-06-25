@@ -28,6 +28,8 @@ public interface TeamService {
 
     Team findByUserIdAndFetchPlayersAndFormation(long id);
 
+    boolean isPlayerForSale(Team team, Player player);
+
     void setPlayers(Team team);
 
     void setFinance(Team team);
