@@ -186,147 +186,164 @@
 
                 </div>
 
-                <%-- Suplentes --%>
-                <div class="row">
-                  <form:select path="substitute1" id="sub1" onchange="update(this.id, value)">
-                    <form:option value="${sub1.id}"><c:out value="${sub1.name}"/></form:option>
-                    <c:forEach items="${players}" var="player">
-                      <c:if test="${player != sub1}">
-                        <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
-                      </c:if>
-                    </c:forEach>
-                  </form:select>
+                <ul class="list-group list-group-flush">
 
-                  <form:select path="substitute2" id="sub2" onchange="update(this.id, value)">
-                    <form:option value="${sub2.id}"><c:out value="${sub2.name}"/></form:option>
-                    <c:forEach items="${players}" var="player">
-                      <c:if test="${player != sub2}">
-                        <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
-                      </c:if>
-                    </c:forEach>
-                  </form:select>
+                  <li class="list-group-item">
+                    <spring:message code="substitutes"/> <p></p>
 
-                  <form:select path="substitute3" id="sub3" onchange="update(this.id, value)">
-                    <form:option value="${sub3.id}"><c:out value="${sub3.name}"/></form:option>
-                    <c:forEach items="${players}" var="player">
-                      <c:if test="${player != sub3}">
-                        <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
-                      </c:if>
-                    </c:forEach>
-                  </form:select>
-
-                  <form:select path="substitute4" id="sub4" onchange="update(this.id, value)">
-                    <form:option value="${sub4.id}"><c:out value="${sub4.name}"/></form:option>
-                    <c:forEach items="${players}" var="player">
-                      <c:if test="${player != sub4}">
-                        <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
-                      </c:if>
-                    </c:forEach>
-                  </form:select>
-
-                  <form:select path="substitute5" id="sub5" onchange="update(this.id, value)">
-                    <form:option value="${sub5.id}"><c:out value="${sub5.name}"/></form:option>
-                    <c:forEach items="${players}" var="player">
-                      <c:if test="${player != sub5}">
-                        <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
-                      </c:if>
-                    </c:forEach>
-                  </form:select>
-
-                  <form:select path="substitute6" id="sub6" onchange="update(this.id, value)">
-                    <form:option value="${sub6.id}"><c:out value="${sub6.name}"/></form:option>
-                    <c:forEach items="${players}" var="player">
-                      <c:if test="${player != sub6}">
-                        <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
-                      </c:if>
-                    </c:forEach>
-                  </form:select>
-
-                  <form:select path="substitute7" id="sub7" onchange="update(this.id, value)">
-                    <form:option value="${sub7.id}"><c:out value="${sub7.name}"/></form:option>
-                    <c:forEach items="${players}" var="player">
-                      <c:if test="${player != sub7}">
-                        <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
-                      </c:if>
-                    </c:forEach>
-                  </form:select>
-                </div>
-
-                <div class="row">
-                  <div class="col">
-                    <h6><spring:message code="captain"/></h6>
-                    <form:select path="captain" id="cap">
-                      <form:option value="${captain.id}"><c:out value="${captain.name}"/></form:option>
+                  <%-- Suplentes --%>
+                    <form:select path="substitute1" id="sub1" onchange="update(this.id, value)">
+                      <form:option value="${sub1.id}"><c:out value="${sub1.name}"/></form:option>
                       <c:forEach items="${players}" var="player">
-                        <c:if test="${player != captain}">
+                        <c:if test="${player != sub1}">
                           <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
                         </c:if>
                       </c:forEach>
                     </form:select>
-                  </div>
 
-                  <div class="col">
-                    <h6><spring:message code="freekickTaker"/></h6>
-                    <form:select path="freeKickTaker" id="fk">
-                      <form:option value="${fk.id}"><c:out value="${fk.name}"/></form:option>
+                    <form:select path="substitute2" id="sub2" onchange="update(this.id, value)">
+                      <form:option value="${sub2.id}"><c:out value="${sub2.name}"/></form:option>
                       <c:forEach items="${players}" var="player">
-                        <c:if test="${player != fk}">
+                        <c:if test="${player != sub2}">
                           <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
                         </c:if>
                       </c:forEach>
                     </form:select>
-                  </div>
 
-                  <div class="col">
-                    <h6><spring:message code="penaltyTaker"/></h6>
-                    <form:select path="penaltyTaker" id="pen">
-                      <form:option value="${pen.id}"><c:out value="${pen.name}"/></form:option>
+                    <form:select path="substitute3" id="sub3" onchange="update(this.id, value)">
+                      <form:option value="${sub3.id}"><c:out value="${sub3.name}"/></form:option>
                       <c:forEach items="${players}" var="player">
-                        <c:if test="${player != pen}">
+                        <c:if test="${player != sub3}">
                           <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
                         </c:if>
                       </c:forEach>
                     </form:select>
-                  </div>
 
-                </div>
+                    <form:select path="substitute4" id="sub4" onchange="update(this.id, value)">
+                      <form:option value="${sub4.id}"><c:out value="${sub4.name}"/></form:option>
+                      <c:forEach items="${players}" var="player">
+                        <c:if test="${player != sub4}">
+                          <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
+                        </c:if>
+                      </c:forEach>
+                    </form:select>
 
-                <div class="row">
-                  <div class="col">
-                    <h6><spring:message code="pressure"/></h6>
-                    <form:select path="pressure" id="pressure">
-                      <form:option value="${pressure}"><c:out value="${pressure}"/></form:option>
-                      <c:forEach items="${pressures}" var="pres">
-                        <c:if test="${pres != pressure}">
-                          <form:option value="${pres}"><c:out value="${pres}"/></form:option>
+                    <form:select path="substitute5" id="sub5" onchange="update(this.id, value)">
+                      <form:option value="${sub5.id}"><c:out value="${sub5.name}"/></form:option>
+                      <c:forEach items="${players}" var="player">
+                        <c:if test="${player != sub5}">
+                          <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
                         </c:if>
                       </c:forEach>
                     </form:select>
-                  </div>
-                  <div class="col">
-                    <h6><spring:message code="attitude"/></h6>
-                    <form:select path="attitude" id="attitude">
-                      <form:option value="${attitude}"><c:out value="${attitude}"/></form:option>
-                      <c:forEach items="${attitudes}" var="att">
-                        <c:if test="${att != attitude}">
-                          <form:option value="${att}"><c:out value="${att}"/></form:option>
+
+                    <form:select path="substitute6" id="sub6" onchange="update(this.id, value)">
+                      <form:option value="${sub6.id}"><c:out value="${sub6.name}"/></form:option>
+                      <c:forEach items="${players}" var="player">
+                        <c:if test="${player != sub6}">
+                          <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
                         </c:if>
                       </c:forEach>
                     </form:select>
-                  </div>
-                  <div class="col">
-                    <h6><spring:message code="formation"/></h6>
-                    <form:select path="formation" onchange="changeFormation(value)">
-                      <form:option value="${formation}"><c:out value="${formation}"/></form:option>
-                      <c:forEach items="${formations}" var="formi">
-                        <c:if test="${formi != formation}">
-                          <form:option value="${formi}"><c:out value="${formi}"/></form:option>
+
+                    <form:select path="substitute7" id="sub7" onchange="update(this.id, value)">
+                      <form:option value="${sub7.id}"><c:out value="${sub7.name}"/></form:option>
+                      <c:forEach items="${players}" var="player">
+                        <c:if test="${player != sub7}">
+                          <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
                         </c:if>
                       </c:forEach>
                     </form:select>
-                  </div>
-                </div>
-                <input type="submit" value="<spring:message code="save"/>" class="btn btn-light"/>
+                  </li>
+
+                  <li class="list-group-item">
+                    <spring:message code="captain"/>
+                    <span class="pull-right">
+                      <form:select path="captain" id="cap">
+                        <form:option value="${captain.id}"><c:out value="${captain.name}"/></form:option>
+                        <c:forEach items="${players}" var="player">
+                          <c:if test="${player != captain}">
+                            <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
+                          </c:if>
+                        </c:forEach>
+                      </form:select>
+                    </span>
+                  </li>
+
+                  <li class="list-group-item">
+                    <spring:message code="freekickTaker"/>
+                    <span class="pull-right">
+                      <form:select path="freeKickTaker" id="fk">
+                        <form:option value="${fk.id}"><c:out value="${fk.name}"/></form:option>
+                        <c:forEach items="${players}" var="player">
+                          <c:if test="${player != fk}">
+                            <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
+                          </c:if>
+                        </c:forEach>
+                      </form:select>
+                    </span>
+                  </li>
+
+                  <li class="list-group-item">
+                    <spring:message code="penaltyTaker"/>
+                    <span class="pull-right">
+                      <form:select path="penaltyTaker" id="pen">
+                        <form:option value="${pen.id}"><c:out value="${pen.name}"/></form:option>
+                        <c:forEach items="${players}" var="player">
+                          <c:if test="${player != pen}">
+                            <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
+                          </c:if>
+                        </c:forEach>
+                      </form:select>
+                    </span>
+                  </li>
+
+                <li class="list-group-item">
+                  <spring:message code="pressure"/>
+                  <span class="pull-right">
+                      <form:select path="pressure" id="pressure">
+                        <form:option value="${pressure}"><c:out value="${pressure}"/></form:option>
+                        <c:forEach items="${pressures}" var="pres">
+                          <c:if test="${pres != pressure}">
+                            <form:option value="${pres}"><c:out value="${pres}"/></form:option>
+                          </c:if>
+                        </c:forEach>
+                      </form:select>
+                  </span>
+                </li>
+                  <li class="list-group-item">
+                    <spring:message code="attitude"/>
+                    <span class="pull-right">
+                      <form:select path="attitude" id="attitude">
+                        <form:option value="${attitude}"><c:out value="${attitude}"/></form:option>
+                        <c:forEach items="${attitudes}" var="att">
+                          <c:if test="${att != attitude}">
+                            <form:option value="${att}"><c:out value="${att}"/></form:option>
+                          </c:if>
+                        </c:forEach>
+                      </form:select>
+                    </span>
+                  </li>
+                  <li class="list-group-item">
+                    <spring:message code="formation"/>
+                    <span class="pull-right">
+                      <form:select path="formation" onchange="changeFormation(value)">
+                        <form:option value="${formation}"><c:out value="${formation}"/></form:option>
+                        <c:forEach items="${formations}" var="formi">
+                          <c:if test="${formi != formation}">
+                            <form:option value="${formi}"><c:out value="${formi}"/></form:option>
+                          </c:if>
+                        </c:forEach>
+                      </form:select>
+                    </span>
+                </li>
+
+                <li class="list-group-item">
+                   <span class="pull-right">
+                     <input type="submit" value="<spring:message code="save"/>" class="btn btn-light"/>
+                   </span>
+                </li>
+                </ul>
               </form:form>
           </div>
         </div>

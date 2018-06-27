@@ -5,6 +5,18 @@
     margin-top: 10px;
 }
 
+#attitude {
+    width: 170px;
+}
+
+#pressure {
+    width: 170px;
+}
+
+#formation {
+    width: 170px;
+}
+
 .button {
     width: 100%;
     background-color: #7ebc83;
@@ -37,6 +49,7 @@
 select {
     margin-right: 1%;
     margin-left: 1%;
+    font-size: 13px;
 }
 
 .forwards select {

@@ -41,10 +41,6 @@
                   <spring:message code="ticketsSold"/>
                   <span class="pull-right"><spring:message code="currency" arguments="${ticketsSold}"/></span>
                 </li>
-                  <%--<li class="list-group-item">
-                    <spring:message code="bankLoan"/>
-                    <span class="pull-right"><spring:message code="currency" arguments="${bankLoanIncome}"/></span>
-                  </li>--%>
               </ul>
             </div>
           </div>
@@ -71,10 +67,6 @@
                   <spring:message code="stadiumExpansion"/>
                   <span class="pull-right"><spring:message code="currency" arguments="${-stadiumExpansion}"/></span>
                 </li>
-                  <%--<li class="list-group-item">
-                    <spring:message code="bankLoan"/>
-                    <span class="pull-right"><spring:message code="currency" arguments="${bankLoanExpense}"/></span>
-                  </li>--%>
             </div>
           </div>
         </div>
