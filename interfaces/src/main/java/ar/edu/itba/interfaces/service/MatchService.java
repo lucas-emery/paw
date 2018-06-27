@@ -1,16 +1,16 @@
 package ar.edu.itba.interfaces.service;
 
-import ar.edu.itba.model.*;
+import ar.edu.itba.model.League;
+import ar.edu.itba.model.Match;
+import ar.edu.itba.model.Team;
+import ar.edu.itba.model.User;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 public interface MatchService {
 
     List<Match> getUpcomingMatches(Team team, Date currentDate);
-
-    void UserMatchEnd(Match match, User user);
 
     void saveMatches(List<Match> matches, User user);
 
@@ -30,13 +30,7 @@ public interface MatchService {
 
     List<Match> findByTeamIdFromDate(long id, Date date);
 
-    List<Match> findByLeagueId(long id);
-
-    List<Match> findByLeagueIdAndDate(long id, Date date);
-
     List<Match> findByLeagueIdAndBeforeDate(long id, Date date);
-
-    void getScores(Match match, Map<String, Integer> homeScores, Map<String, Integer> awayScores);
 
     void setTeamsAndFormations(List<Match> matches);
 

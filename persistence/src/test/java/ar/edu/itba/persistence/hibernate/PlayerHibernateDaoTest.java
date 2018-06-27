@@ -26,7 +26,6 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = JPAConfiguration.class)
 @Sql("classpath:schema.sql")
-@Ignore("Hibernate Dao test ignored")
 @Transactional
 public class PlayerHibernateDaoTest {
     private final String NAME = "Pepe";

@@ -15,7 +15,7 @@
       <div class="translucent"></div>
       <div class="content">
 
-        <h2>Choose team</h2>
+        <h2><spring:message code="chooseTeam"/></h2>
 
         <form:form modelAttribute="chooseTeamForm" action="${postPath}" method="post">
           <div class="form-group">
@@ -26,7 +26,8 @@
           </div>
 
           <div class="right">
-            <input type="submit" value="Start >>" class="btn btn-light"/>
+            <button type="submit" class="btn btn-success "><spring:message code="start"/> &nbsp; <i class="fa fa-play"></i>
+            </button>
           </div>
         </form:form>
       </div>

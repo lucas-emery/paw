@@ -1,10 +1,8 @@
 package ar.edu.itba.services;
 
-import ar.edu.itba.interfaces.dao.LeagueDao;
 import ar.edu.itba.interfaces.dao.MatchDao;
 import ar.edu.itba.interfaces.dao.TeamDao;
-import ar.edu.itba.interfaces.service.LeagueService;
-import ar.edu.itba.interfaces.service.MatchService;
+import ar.edu.itba.interfaces.service.*;
 import ar.edu.itba.model.League;
 import ar.edu.itba.model.Match;
 import ar.edu.itba.model.Team;
@@ -26,7 +24,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration
+@ContextConfiguration(classes = {DaoConfiguration.class, LeagueServiceTest.LeagueServiceConfig.class})
 public class LeagueServiceTest {
 
     @Configuration
@@ -38,23 +36,33 @@ public class LeagueServiceTest {
         }
 
         @Bean
+        public FixtureService fixtureService(){
+            return new FixtureServiceImpl();
+        }
+
+        @Bean
+        public TeamService teamService(){
+            return new TeamServiceImpl();
+        }
+
+        @Bean
+        public AiService aiService(){
+            return new AiServiceImpl();
+        }
+
+        @Bean
+        public FormationService formationService(){
+            return new FormationServiceImpl();
+        }
+
+        @Bean
+        public EconomyService economyService(){
+            return new EconomyServiceImpl();
+        }
+
+        @Bean
         public MatchService matchService() {
             return mock(MatchService.class);
-        }
-
-        @Bean
-        public MatchDao matchDao() {
-            return mock(MatchDao.class);
-        }
-
-        @Bean
-        public LeagueDao leagueDao() {
-            return mock(LeagueDao.class);
-        }
-
-        @Bean
-        public TeamDao teamDao() {
-            return mock(TeamDao.class);
         }
     }
 
@@ -128,8 +136,8 @@ public class LeagueServiceTest {
     public void getPoints() {
         Map<Team, Integer> points = leagueService.getTeamPoints(league, date);
 
-        assertEquals(Optional.ofNullable(points.get(t1)),1);
-        assertEquals(Optional.ofNullable(points.get(t2)), 7);
+        assertEquals(points.get(t1),Optional.of(1).get());
+        assertEquals(points.get(t2), Optional.of(7).get());
         assertEquals(points.size(), 2);
     }
 

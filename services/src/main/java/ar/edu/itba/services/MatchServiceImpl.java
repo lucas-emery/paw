@@ -23,47 +23,16 @@ public class MatchServiceImpl implements MatchService {
     private StadiumDao stadiumDao;
 
     @Autowired
-    private TeamDao teamDao;
-
-    @Autowired
-    private UserDao userDao;
-
-    @Autowired
-    private LeagueDao leagueDao;
-
-    @Autowired
-    private LeagueService leagueService;
-
-    @Autowired
     private TeamService teamService;
 
     @Autowired
     private AiService aiService;
 
     @Autowired
-    private StadiumService stadiumService;
-
-    @Autowired
     private EventDao eventDao;
 
     @Autowired
     private EconomyService economyService;
-
-    @Override
-    public void getScores(Match match, Map<String, Integer> homeScores, Map<String, Integer> awayScores) {
-
-        for (Event event : match.getEvents()) {
-            if(event.getType() == Event.Type.HOMESCORE || event.getType() == Event.Type.AWAYSCORE) {
-                Player player = event.getP1();
-
-                if(player.getTeam().equals(match.getHome()))
-                    homeScores.put(player.getName(), event.getMinute());
-                else
-                    awayScores.put(player.getName(), event.getMinute());
-            }
-        }
-
-    }
 
     @Override
     public void setTeamsAndFormations(List<Match> matches) {
@@ -138,19 +107,6 @@ public class MatchServiceImpl implements MatchService {
         match.getEvents().size();
     }
 
-    @Override
-    @Deprecated
-    public void UserMatchEnd(Match match, User user) {
-        Team team = match.getHome();
-        if(match.getHomeId() == user.getTeamId()) {
-            addMatchEarnings(team);
-        }
-        else {
-            team = match.getAway();
-        }
-        teamDao.save(team);
-    }
-
     private void addMatchEarnings(Team team) {
         int amount = stadiumDao.findByTeamId(team.getId()).calculateMatchEarnings();
         receiptDao.create(team, amount, Receipt.Type.MATCHINCOME);
@@ -209,16 +165,6 @@ public class MatchServiceImpl implements MatchService {
     @Override
     public List<Match> findByTeamIdFromDate(long id, Date date) {
         return matchDao.findByTeamIdFromDate(id, date);
-    }
-
-    @Override
-    public List<Match> findByLeagueId(long id) {
-        return matchDao.findByLeagueId(id);
-    }
-
-    @Override
-    public List<Match> findByLeagueIdAndDate(long id, Date date) {
-        return matchDao.findByLeagueIdAndDate(id, date);
     }
 
     @Override

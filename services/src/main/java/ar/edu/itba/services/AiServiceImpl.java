@@ -19,6 +19,9 @@ public class AiServiceImpl implements AiService {
     @Override
     public Formation getFormation(List<Player> players) {
 
+        if(players.size() < 18)
+            return null;
+
         Map<Player,Point> starters = new HashMap<>();
         List<Player> tired = new ArrayList<>();
         Player captain, fkTaker, penaltyTaker;
@@ -30,36 +33,44 @@ public class AiServiceImpl implements AiService {
 
         players.removeAll(tired);
 
-        tired.sort((player, t1) -> player.getFitness() - t1.getFitness());
 
-        players.sort((player, t1) -> player.getAge() - t1.getAge());
+        if(players.size() < 11){
+            tired.sort((player, t1) -> t1.getFitness() - player.getFitness());
+            players.addAll(tired.subList(0, 11 - players.size()));
+        }
+
+        players.sort(Comparator.comparingInt(Player::getAge));
         captain = useLast(players,false);
 
-        players.sort((player, t1) -> player.getFinishing() - t1.getFinishing());
+        players.sort(Comparator.comparingInt(Player::getFinishing));
         penaltyTaker = useLast(players, false);
 
-        players.sort((player, t1) -> player.getPassing() - t1.getPassing());
+        players.sort(Comparator.comparingInt(Player::getPassing));
         fkTaker = useLast(players, false);
 
-        players.sort((player, t1) -> player.getGoalKeeping() - t1.getGoalKeeping());
+        players.sort(Comparator.comparingInt(Player::getGoalKeeping));
         starters.put(useLast(players, true), new Point(0,4));
 
-        players.sort((player, t1) -> player.getDefending() - t1.getDefending());
+        players.sort(Comparator.comparingInt(Player::getDefending));
         for (int i = 0; i < 4; i++) {
             starters.put(useLast(players, true), new Point(1, 1 + 2*i));
         }
 
-        players.sort((player, t1) -> player.getPassing() - t1.getPassing());
+        players.sort(Comparator.comparingInt(Player::getPassing));
         starters.put(useLast(players,true), new Point(4, 3));
         starters.put(useLast(players,true), new Point(4, 1));
         starters.put(useLast(players,true), new Point(4, 7));
         starters.put(useLast(players,true), new Point(4, 5));
 
-        players.sort((player, t1) -> player.getFinishing() - t1.getFinishing());
+        players.sort(Comparator.comparingInt(Player::getFinishing));
         starters.put(useLast(players,true), new Point(7,3));
         starters.put(useLast(players,true), new Point(7, 5));
 
-        return formationService.create(starters, tired,50,50, captain,fkTaker,penaltyTaker);
+        players.addAll(tired);
+
+        players.sort((player, t1) -> t1.getFitness() - player.getFitness());
+
+        return formationService.create(starters, players.subList(0, 7),0,0, captain,fkTaker,penaltyTaker);
     }
 
     private Player useLast(List<Player> list, boolean remove){

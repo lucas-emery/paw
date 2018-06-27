@@ -24,7 +24,6 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = JPAConfiguration.class)
 @Sql("classpath:schema.sql")
-@Ignore("Hibernate Dao test ignored")
 @Transactional
 public class MatchHibernateDaoTest {
     private static final Date DATE = new Date(2000,8,15);

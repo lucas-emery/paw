@@ -74,20 +74,6 @@ public class TeamHibernateDaoTest {
     }
 
     @Test
-    public void testCreateById() {
-        final Team team = teamDao.create(NAME, league.getId(), NO_ID, FANCOUNT, FANTRUST, BOARDTRUST, MONEY);
-        assertNotNull(team);
-        assertEquals(NAME, team.getName());
-        assertEquals(league.getId(), team.getLeagueId());
-        assertEquals(SQL_NULL_INT, team.getFormationId());
-        assertEquals(FANCOUNT, team.getFanCount());
-        assertEquals(FANTRUST, team.getFanTrust());
-        assertEquals(BOARDTRUST, team.getBoardTrust());
-        assertEquals(MONEY, team.getMoney());
-        assertEquals(MONEY, team.getMoney());
-    }
-
-    @Test
     public void testFindById() {
         final long id = teamDao.create(NAME, league, null, null, null, null, FANCOUNT, FANTRUST, BOARDTRUST, MONEY).getId();
         Team team = teamDao.findById(id);

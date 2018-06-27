@@ -23,7 +23,6 @@ import static org.junit.Assert.assertNotNull;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = JPAConfiguration.class)
 @Sql("classpath:schema.sql")
-@Ignore("Hibernate Dao test ignored")
 @Transactional
 public class ReceiptHibernateDaoTest {
     private final int AMOUNT = 41231;

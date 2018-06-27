@@ -40,6 +40,10 @@ public class Receipt {
         this.id = id;
     }
 
+    public Team getTeam(){
+        return team;
+    }
+
     public int getAmount(){
         return amount;
     }

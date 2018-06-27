@@ -12,6 +12,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.*;
 
@@ -35,11 +37,20 @@ public class UserController extends Controller{
     }
 
     @RequestMapping(value = "/create", method = { RequestMethod.POST })
-    public ModelAndView create(@Valid @ModelAttribute("registerForm") final UserForm form, final BindingResult errors) {
+    public ModelAndView create(HttpServletRequest request, @Valid @ModelAttribute("registerForm") final UserForm form, final BindingResult errors) {
         if (errors.hasErrors()) {
             return index(form);
         }
         final User u = us.create(form.getUsername(), form.getPassword(), "", new GregorianCalendar(2018,0,1).getTime());
+        if(u == null) {
+            return index(form);
+        }
+        try {
+            request.login(form.getUsername(), form.getPassword());
+            return new ModelAndView("redirect:/");
+        } catch (ServletException e) {
+            LOGGER.error("Error while login ", e);
+        }
         return new ModelAndView("redirect:/login");
     }
 

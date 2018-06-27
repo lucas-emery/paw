@@ -8,21 +8,15 @@ import ar.edu.itba.model.Player;
 import ar.edu.itba.model.Team;
 import ar.edu.itba.model.User;
 import ar.edu.itba.model.utils.Point;
-import ar.edu.itba.webapp.form.ChooseTeamForm;
 import ar.edu.itba.webapp.form.FormationForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -46,7 +40,7 @@ public class FormationController extends Controller{
         Formation formation = team.getFormation();
         List<Player> substitutes = formation.getSubstitutes();
         mav.addObject("players", team.getPlayers());
-        mav.addObject("starters", formation.getStarters().keySet());
+        mav.addObject("starters", formation.getStarters());
         mav.addObject("gk", formation.getGk());
         mav.addObject("lb", formation.getLb());
         mav.addObject("lcb", formation.getLcb());
@@ -115,53 +109,19 @@ public class FormationController extends Controller{
         Player rf = playerService.findById(form.getRightForward());
         Player rw = playerService.findById(form.getRightWing());
 
-        Map<Player, Point> positions = new HashMap<>();
-        if(gk != null)
-            positions.put(gk, new Point(0,4));
-        if(lb != null)
-            positions.put(lb, new Point(1, 7));
-        if(lcb != null)
-            positions.put(lcb, new Point(1, 5));
-        if(cb != null)
-            positions.put(cb, new Point(1, 4));
-        if(rcb != null)
-            positions.put(rcb, new Point(1, 3));
-        if(rb != null)
-            positions.put(rb, new Point(1, 1));
-        if(cdm != null)
-            positions.put(cdm, new Point(3, 4));
-        if(lm != null)
-            positions.put(lm, new Point(4, 7));
-        if(lcm != null)
-            positions.put(lcm, new Point(4, 5));
-        if(rcm != null)
-            positions.put(rcm, new Point(4, 3));
-        if(rm != null)
-            positions.put(rm, new Point(4, 1));
-        if(cam != null)
-            positions.put(cam, new Point(5, 4));
-        if(lw != null)
-            positions.put(lw, new Point(7, 7));
-        if(lf != null)
-            positions.put(lf, new Point(7, 5));
-        if(st != null)
-            positions.put(st, new Point(7, 4));
-        if(rf != null)
-            positions.put(rf, new Point(7, 3));
-        if(rw != null)
-            positions.put(rw, new Point(7, 1));
+        Player sub1 = playerService.findById(form.getSubstitute1());
+        Player sub2 = playerService.findById(form.getSubstitute2());
+        Player sub3 = playerService.findById(form.getSubstitute3());
+        Player sub4 = playerService.findById(form.getSubstitute4());
+        Player sub5 = playerService.findById(form.getSubstitute5());
+        Player sub6 = playerService.findById(form.getSubstitute6());
+        Player sub7 = playerService.findById(form.getSubstitute7());
 
-        List<Player> substitutes = new ArrayList<>();
-        substitutes.add(playerService.findById(form.getSubstitute1()));
-        substitutes.add(playerService.findById(form.getSubstitute2()));
-        substitutes.add(playerService.findById(form.getSubstitute3()));
-        substitutes.add(playerService.findById(form.getSubstitute4()));
-        substitutes.add(playerService.findById(form.getSubstitute5()));
-        substitutes.add(playerService.findById(form.getSubstitute6()));
-        substitutes.add(playerService.findById(form.getSubstitute7()));
+        Map<Player, Point> starters = formationService.createStarters(gk,lb,lcb,cb,rcb,rb,cdm,lm,lcm,rcm,rm,cam,lw,lf,st,rf,rw);
+        List<Player> substitutes = formationService.createSubstitutes(sub1,sub2,sub3,sub4,sub5,sub6,sub7);
 
         Formation formation = team.getFormation();
-        formation.setStarters(positions);
+        formation.setStarters(starters);
         formation.setSubstitutes(substitutes);
         formation.setCaptain(playerService.findById(form.getCaptain()));
         formation.setFreeKickTaker(playerService.findById(form.getFreeKickTaker()));

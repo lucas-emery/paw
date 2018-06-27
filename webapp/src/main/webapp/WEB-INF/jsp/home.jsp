@@ -18,7 +18,7 @@
           <div class="card">
             <div class="card-body">
               <div class="stat-widget-one">
-                <div class="stat-icon dib"><i class="ti-user text-primary border-primary"></i></div>
+                <div class="stat-icon dib"><i class="ti-shield text-primary border-primary"></i></div>
                 <div class="stat-content dib">
                   <div class="team-name"><c:out value="${team.name}"/></div>
                 </div>

@@ -13,20 +13,42 @@ jQuery(document).ready(function(){
 function load() {
     var i;
     getInitialValues();
-
-    for(i=0; i<positions.size; i++){
-        var select = document.getElementById(positions[i]);
-        select.value = select.options[0].value;
-    }
-
-    for(i=0; i<substitutes.size; i++){
-        var select = document.getElementById(substitutes[i]);
-        select.value = select.options[0].value;
+    /*
+    jQuery("#cap option").each(function()
+    {
+        jQuery(this).toggleOption(false);
+    });
+    jQuery("#fk option").each(function()
+    {
+        jQuery(this).toggleOption(false);
+    });
+    jQuery("#pen option").each(function()
+    {
+        jQuery(this).toggleOption(false);
+    });
+    */
+    for(i=0; i<positions.length; i++){
+        var player = players[i];
+        jQuery('#sub1').find("option[value='"+player.toString()+"']").toggleOption(false);
+        jQuery('#sub2').find("option[value='"+player.toString()+"']").toggleOption(false);
+        jQuery('#sub3').find("option[value='"+player.toString()+"']").toggleOption(false);
+        jQuery('#sub4').find("option[value='"+player.toString()+"']").toggleOption(false);
+        jQuery('#sub5').find("option[value='"+player.toString()+"']").toggleOption(false);
+        jQuery('#sub6').find("option[value='"+player.toString()+"']").toggleOption(false);
+        jQuery('#sub7').find("option[value='"+player.toString()+"']").toggleOption(false);
+        /*
+        jQuery('#cap').find("option[value='"+player.toString()+"']").toggleOption(true);
+        jQuery('#fk').find("option[value='"+player.toString()+"']").toggleOption(true);
+        jQuery('#pen').find("option[value='"+player.toString()+"']").toggleOption(true);
+        */
     }
 
     document.getElementById("pressure").value = document.getElementById("pressure").options[0].value;
     document.getElementById("attitude").value = document.getElementById("attitude").options[0].value;
     document.getElementById("formation").value = document.getElementById("formation").options[0].value;
+    document.getElementById("cap").value = document.getElementById("cap").options[0].value;
+    document.getElementById("fk").value = document.getElementById("fk").options[0].value;
+    document.getElementById("pen").value = document.getElementById("pen").options[0].value;
 
     showCurrentFormation(document.getElementById("formation").value);
 }
@@ -249,33 +271,20 @@ function update(position, player) {
     var playerIndex = positions.indexOf(position);
     var i;
     if(playerIndex !== -1) {
-            for (i = 0; i < players.length; i++) {
-                if (i !== playerIndex && players[i] === player) {//Cambio titular por titular
-                    document.getElementById(positions[i]).value = players[playerIndex];
-                    players[i] = players[playerIndex];
-                    players[playerIndex] = player;
-                    break;
-                }
+        var oldPlayer = players[playerIndex];
+        for (i = 0; i < players.length; i++) {
+            if (i !== playerIndex && players[i] === player) {//Cambio titular por titular
+                document.getElementById(positions[i]).value = players[playerIndex];
+                players[i] = players[playerIndex];
+                players[playerIndex] = player;
+                break;
             }
-            if (i >= players.length) {//Cambio titular por suplente
-                for (i = 0; i < substitutes.length; i++) {
-                    if (substitutes[i] === player) {
-                        document.getElementById(subPos[i]).value = players[playerIndex];
-                        if (players[playerIndex] === document.getElementById("cap").value) {
-                            document.getElementById("cap").value = player;
-                        }
-                        if (players[playerIndex] === document.getElementById("fk").value) {
-                            document.getElementById("fk").value = player;
-                        }
-                        if (players[playerIndex] === document.getElementById("pen").value) {
-                            document.getElementById("pen").value = player;
-                        }
-                        substitutes[i] = players[playerIndex];
-                        players[playerIndex] = player;
-                        break;
-                    }
-                }
-                if (i >= substitutes.length) {//Cambio titular por reserva
+        }
+        if (i >= players.length) {//Cambio titular por suplente
+            changeSubs(player, oldPlayer);
+            for (i = 0; i < substitutes.length; i++) {
+                if (substitutes[i] === player) {
+                    document.getElementById(subPos[i]).value = players[playerIndex];
                     if (players[playerIndex] === document.getElementById("cap").value) {
                         document.getElementById("cap").value = player;
                     }
@@ -285,9 +294,25 @@ function update(position, player) {
                     if (players[playerIndex] === document.getElementById("pen").value) {
                         document.getElementById("pen").value = player;
                     }
+                    substitutes[i] = players[playerIndex];
                     players[playerIndex] = player;
+                    break;
                 }
             }
+            if (i >= substitutes.length) {//Cambio titular por reserva
+                if (players[playerIndex] === document.getElementById("cap").value) {
+                    document.getElementById("cap").value = player;
+                }
+                if (players[playerIndex] === document.getElementById("fk").value) {
+                    document.getElementById("fk").value = player;
+                }
+                if (players[playerIndex] === document.getElementById("pen").value) {
+                    document.getElementById("pen").value = player;
+                }
+                players[playerIndex] = player;
+            }
+            //changeRoles(player, oldPlayer);
+        }
     }
     else {//Cambio de suplente con suplente
         playerIndex = subPos.indexOf(position);
@@ -305,6 +330,43 @@ function update(position, player) {
 
     }
 }
+
+function changeRoles(player, oldPlayer) {
+    jQuery('#cap').find("option[value='"+oldPlayer.toString()+"']").toggleOption(false);
+    jQuery('#cap').find("option[value='"+player.toString()+"']").toggleOption(true);
+    jQuery('#fk').find("option[value='"+oldPlayer.toString()+"']").toggleOption(false);
+    jQuery('#fk').find("option[value='"+player.toString()+"']").toggleOption(true);
+    jQuery('#pen').find("option[value='"+oldPlayer.toString()+"']").toggleOption(false);
+    jQuery('#pen').find("option[value='"+player.toString()+"']").toggleOption(true);
+}
+
+function changeSubs(player, oldPlayer){
+    jQuery('#sub1').find("option[value='"+oldPlayer.toString()+"']").toggleOption(true);
+    jQuery('#sub1').find("option[value='"+player.toString()+"']").toggleOption(false);
+    jQuery('#sub2').find("option[value='"+oldPlayer.toString()+"']").toggleOption(true);
+    jQuery('#sub2').find("option[value='"+player.toString()+"']").toggleOption(false);
+    jQuery('#sub3').find("option[value='"+oldPlayer.toString()+"']").toggleOption(true);
+    jQuery('#sub3').find("option[value='"+player.toString()+"']").toggleOption(false);
+    jQuery('#sub4').find("option[value='"+oldPlayer.toString()+"']").toggleOption(true);
+    jQuery('#sub4').find("option[value='"+player.toString()+"']").toggleOption(false);
+    jQuery('#sub5').find("option[value='"+oldPlayer.toString()+"']").toggleOption(true);
+    jQuery('#sub5').find("option[value='"+player.toString()+"']").toggleOption(false);
+    jQuery('#sub6').find("option[value='"+oldPlayer.toString()+"']").toggleOption(true);
+    jQuery('#sub6').find("option[value='"+player.toString()+"']").toggleOption(false);
+    jQuery('#sub7').find("option[value='"+oldPlayer.toString()+"']").toggleOption(true);
+    jQuery('#sub7').find("option[value='"+player.toString()+"']").toggleOption(false);
+}
+
+jQuery.fn.toggleOption = function( show ) {
+    jQuery( this ).toggle( show );
+    if( show ) {
+        if( jQuery( this ).parent( 'span.toggleOption' ).length )
+            jQuery( this ).unwrap( );
+    } else {
+        if( jQuery( this ).parent( 'span.toggleOption' ).length === 0 )
+            jQuery( this ).wrap( '<span class="toggleOption" style="display: none;" />' );
+    }
+};
 
 function changeFormation(formation) {
     showCurrentFormation(formation);

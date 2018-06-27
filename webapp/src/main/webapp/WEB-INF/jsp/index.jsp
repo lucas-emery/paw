@@ -1,6 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <t:genericpage>
   <jsp:attribute name="styles">
@@ -15,30 +16,30 @@
         <div class="login-content">
           <div class="login-logo">
             <%--<img class="align-content" src="images/logo.png" alt="">--%>
-            <span class="align-content">Football Manager</span>
+            <span class="align-content"><spring:message code="appName"/></span>
           </div>
           <div class="login-form">
             <form:form modelAttribute="registerForm" action="${postPath}" method="post">
               <div class="form-group">
-                <form:label path="username">Username </form:label>
+                <form:label path="username"><spring:message code="username"/></form:label>
                 <form:input type="text" path="username" class="form-control" />
                 <form:errors path="username" cssClass="formError" element="p"/>
               </div>
 
               <div class="form-group">
-                <form:label path="password">Password </form:label>
+                <form:label path="password"><spring:message code="password"/></form:label>
                 <form:input type="password" path="password" class="form-control" />
                 <form:errors path="password" cssClass="formError" element="p"/>
               </div>
 
               <div class="form-group">
-                <form:label path="repeatPassword">Repeat password </form:label>
+                <form:label path="repeatPassword"><spring:message code="repeatPassword"/></form:label>
                 <form:input type="password" path="repeatPassword" class="form-control" />
                 <form:errors path="repeatPassword" cssClass="formError" element="p"/>
               </div>
-              <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Register</button>
+              <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30"><spring:message code="signUpButton"/></button>
               <div class="register-link m-t-15 text-center">
-                <p>Already have account ? <a href="<c:url value="/login"/>"> Sign in</a></p>
+                <p><spring:message code="alreadyHaveAccount"/> <a href="<c:url value="/login"/>"><spring:message code="signIn"/></a></p>
               </div>
             </form:form>
           </div>

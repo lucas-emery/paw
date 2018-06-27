@@ -69,20 +69,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return ds;
     }
 
-    /*@Bean
-    public DataSourceInitializer dataSourceInitializer(final DataSource ds) {
-        final DataSourceInitializer dsi = new DataSourceInitializer();
-        dsi.setDataSource(ds);
-        dsi.setDatabasePopulator(databasePopulator());
-        return dsi;
-    }
-
-    private DatabasePopulator databasePopulator() {
-        final ResourceDatabasePopulator dbp = new ResourceDatabasePopulator();
-        dbp.addScript(schemaSql);
-        return dbp;
-    }*/
-
     @Bean
     public PlatformTransactionManager transactionManager(final EntityManagerFactory emf) {
         return new JpaTransactionManager(emf);
@@ -99,11 +85,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         final Properties properties = new Properties();
         properties.setProperty("hibernate.hbm2ddl.auto", "update");
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL92Dialect");
-
-        //TODO Si ponen esto en prod, hay tabla!!!
-        properties.setProperty("hibernate.show_sql", "true");
-        properties.setProperty("format_sql", "true");
-
         factoryBean.setJpaProperties(properties);
         return factoryBean;
     }

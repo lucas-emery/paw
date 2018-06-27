@@ -35,7 +35,7 @@
               <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30"><spring:message code="signIn"/></button>
 
               <div class="register-link m-t-15 text-center">
-                <p><spring:message code="dontHaveAccount"/> <a href="<c:url value="/register"/>"> <spring:message code="SignUp"/></a></p>
+                <p><spring:message code="dontHaveAccount"/> <a href="<c:url value="/register"/>"> <spring:message code="signUp"/></a></p>
               </div>
             </form>
           </div>

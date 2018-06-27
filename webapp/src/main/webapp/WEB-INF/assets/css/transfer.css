@@ -1,3 +1,14 @@
 .card {
     font-size: 12px;
 }
+
+.filter-label {
+    /*max-width: initial;*/
+}
+
+.filter-field {
+    border-radius: 4px;
+    border: 1px #aaa;
+    border-style: solid;
+    height: 22px;
+}

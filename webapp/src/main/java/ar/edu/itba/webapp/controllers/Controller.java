@@ -18,7 +18,7 @@ public class Controller {
     @ModelAttribute
     public User loggedUser() {
         final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        final User user = us.findByUsername(auth.getName());
+        final User user = us.findByUsername(auth == null ? "" : auth.getName());
         return user;
     }
 }

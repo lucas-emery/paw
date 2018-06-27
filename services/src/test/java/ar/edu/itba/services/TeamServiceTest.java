@@ -1,11 +1,7 @@
 package ar.edu.itba.services;
 
-import ar.edu.itba.interfaces.dao.PlayerDao;
-import ar.edu.itba.interfaces.dao.ReceiptDao;
-import ar.edu.itba.interfaces.dao.TeamDao;
 import ar.edu.itba.interfaces.service.AiService;
 import ar.edu.itba.interfaces.service.FormationService;
-import ar.edu.itba.interfaces.service.PlayerService;
 import ar.edu.itba.interfaces.service.TeamService;
 import ar.edu.itba.model.Player;
 import ar.edu.itba.model.Receipt;
@@ -22,12 +18,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.ArrayList;
 import java.util.List;
 
+<<<<<<< HEAD
 import static junit.framework.TestCase.assertTrue;
+=======
+import static junit.framework.TestCase.assertEquals;
+>>>>>>> master
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration
+@ContextConfiguration(classes = {DaoConfiguration.class, TeamServiceTest.TeamServiceConfig.class})
 public class TeamServiceTest {
 
     @Configuration
@@ -39,31 +39,18 @@ public class TeamServiceTest {
         }
 
         @Bean
-        public AiService formationService() {
+        public AiService aiService(){
             return new AiServiceImpl();
         }
 
         @Bean
-        public TeamDao teamDao() {
-            return mock(TeamDao.class);
-        }
-
-        @Bean
-        public PlayerDao playerDao() {
-            return mock(PlayerDao.class);
-        }
-
-        @Bean
-        public ReceiptDao receiptDao() {
-            return mock(ReceiptDao.class);
+        public FormationService formationService(){
+            return new FormationServiceImpl();
         }
     }
 
     @Autowired
     private TeamService teamService;
-
-    @Autowired
-    private TeamDao teamDao;
 
     private Player player1, player2, player3;
     private Team team;
@@ -107,6 +94,7 @@ public class TeamServiceTest {
     }
 
     @Test
+<<<<<<< HEAD
     public void ticketsSold() {
         int amount = teamService.getTicketsSold(team);
 
@@ -114,6 +102,8 @@ public class TeamServiceTest {
     }
 
     @Test
+=======
+>>>>>>> master
     public void salaries() {
         int amount = teamService.getSalaries(team);
 

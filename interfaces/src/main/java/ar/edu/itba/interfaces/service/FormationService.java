@@ -17,4 +17,8 @@ public interface FormationService {
 
     boolean isValid(Formation formation);
 
-}
+    Map<Player, Point> createStarters(Player gk, Player lb, Player lcb, Player cb, Player rcb, Player rb, Player cdm, Player lm, Player lcm, Player rcm, Player rm, Player cam, Player lw, Player lf, Player st, Player rf, Player rw);
+
+    List<Player> createSubstitutes(Player sub1, Player sub2, Player sub3, Player sub4, Player sub5, Player sub6, Player sub7);
+
+    }

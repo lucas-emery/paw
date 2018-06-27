@@ -72,10 +72,10 @@
 
                     <%-- Volantes --%>
                     <div class="row topMid d-flex justify-content-center">
-                      <form:select path="centerDefensiveMid" id="cdm" onchange="update(this.id, value)">
-                        <form:option value="${cdm.id}"><c:out value="${cdm.name}"/></form:option>
+                      <form:select path="centerAttackingMid" id="cam" onchange="update(this.id, value)">
+                        <form:option value="${cam.id}"><c:out value="${cam.name}"/></form:option>
                         <c:forEach items="${players}" var="player">
-                          <c:if test="${player != cdm && player.getPosition() == 2}">
+                          <c:if test="${player != cam && player.getPosition() == 2}">
                             <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
                           </c:if>
                         </c:forEach>
@@ -116,10 +116,10 @@
                       </form:select>
                     </div>
                     <div class="row lowMid d-flex justify-content-center">
-                      <form:select path="centerAttackingMid" id="cam" onchange="update(this.id, value)">
-                        <form:option value="${cam.id}"><c:out value="${cam.name}"/></form:option>
+                      <form:select path="centerDefensiveMid" id="cdm" onchange="update(this.id, value)">
+                        <form:option value="${cdm.id}"><c:out value="${cdm.name}"/></form:option>
                         <c:forEach items="${players}" var="player">
-                          <c:if test="${player != cam && player.getPosition() == 2}">
+                          <c:if test="${player != cdm && player.getPosition() == 2}">
                             <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
                           </c:if>
                         </c:forEach>
@@ -183,7 +183,6 @@
                         </c:forEach>
                       </form:select>
                     </div>
-
                 </div>
 
                 <ul class="list-group list-group-flush">
@@ -228,6 +227,7 @@
                       </c:forEach>
                     </form:select>
 
+<<<<<<< HEAD
                     <form:select path="substitute5" id="sub5" onchange="update(this.id, value)">
                       <form:option value="${sub5.id}"><c:out value="${sub5.name}"/></form:option>
                       <c:forEach items="${players}" var="player">
@@ -242,6 +242,27 @@
                       <c:forEach items="${players}" var="player">
                         <c:if test="${player != sub6}">
                           <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
+=======
+                <div class="row">
+                  <div class="col">
+                    <h6><spring:message code="pressure"/></h6>
+                    <form:select path="pressure" id="pressure">
+                      <form:option value="${pressure}"><spring:message code="pressure.${pressure}"/></form:option>
+                      <c:forEach items="${pressures}" var="pres">
+                        <c:if test="${pres != pressure}">
+                          <form:option value="${pres}"><spring:message code="pressure.${pres}"/></form:option>
+                        </c:if>
+                      </c:forEach>
+                    </form:select>
+                  </div>
+                  <div class="col">
+                    <h6><spring:message code="attitude"/></h6>
+                    <form:select path="attitude" id="attitude">
+                      <form:option value="${attitude}"><spring:message code="attitude.${attitude}"/></form:option>
+                      <c:forEach items="${attitudes}" var="att">
+                        <c:if test="${att != attitude}">
+                          <form:option value="${att}"><spring:message code="attitude.${att}"/></form:option>
+>>>>>>> master
                         </c:if>
                       </c:forEach>
                     </form:select>

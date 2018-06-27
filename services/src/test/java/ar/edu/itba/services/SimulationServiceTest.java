@@ -1,6 +1,8 @@
 package ar.edu.itba.services;
 
-import ar.edu.itba.interfaces.service.SimulationService;
+import ar.edu.itba.interfaces.dao.MatchDao;
+import ar.edu.itba.interfaces.dao.MatchStateDao;
+import ar.edu.itba.interfaces.service.MatchService;
 import ar.edu.itba.model.*;
 import ar.edu.itba.model.utils.Point;
 import org.junit.Test;
@@ -8,16 +10,49 @@ import org.mockito.Mock;
 
 import java.util.*;
 
-import static org.junit.Assert.*;
+import static ar.edu.itba.model.utils.simulation.MyTeam.AWAY;
+import static ar.edu.itba.model.utils.simulation.MyTeam.HOME;
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
 import static org.mockito.Mockito.mock;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {DaoConfiguration.class, SimulationServiceTest.SimulationServiceConfig.class})
 public class SimulationServiceTest {
 
     List<Player> players = new ArrayList<>();
     Formation f1,f2;
     Team t1,t2;
 
-    public Player dummy(){
+        @Bean
+        public MatchStateDao matchStateDao(){
+            return mock(MatchStateDao.class);
+        }
+
+        @Bean
+        public MatchDao matchDao(){
+            return mock(MatchDao.class);
+        }
+
+        @Bean
+        public MatchService matchService(){
+            return mock(MatchService.class);
+        }
+    }
+
+    @Autowired
+    private SimulationServiceImpl simulationService;
+
+    private List<Player> players;
+    private Formation f1,f2;
+    private Team t1,t2;
+    private List<Event> events;
+    private Grid grid;
+    private GridNode gridNode;
+    private SimulationNode sNode1, sNode2;
+    private MatchStatus matchStatus;
+
+    private Player dummy(){
         return new Player(0,0,"pepe",20,10,80,80,70,70,70,70,100,10,new Date(),false);
     }
 

@@ -1,9 +1,7 @@
 package ar.edu.itba.services;
 
 import ar.edu.itba.interfaces.dao.*;
-import ar.edu.itba.interfaces.service.LeagueService;
-import ar.edu.itba.interfaces.service.TeamService;
-import ar.edu.itba.interfaces.service.UserService;
+import ar.edu.itba.interfaces.service.*;
 import ar.edu.itba.model.Team;
 import ar.edu.itba.model.User;
 import org.junit.Before;
@@ -20,7 +18,7 @@ import static junit.framework.TestCase.assertTrue;
 import static org.mockito.Mockito.mock;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration
+@ContextConfiguration(classes = {DaoConfiguration.class, UserServiceTest.UserServiceConfig.class})
 public class UserServiceTest {
 
     @Configuration
@@ -42,23 +40,23 @@ public class UserServiceTest {
         }
 
         @Bean
-        public LeagueDao leagueDao() {
-            return mock(LeagueDao.class);
+        public TeamService teamService(){
+            return new TeamServiceImpl();
         }
 
         @Bean
-        public MatchDao matchDao() {
-            return mock(MatchDao.class);
+        public AiService aiService(){
+            return new AiServiceImpl();
         }
 
         @Bean
-        public ReceiptDao receiptDao() {
-            return mock(ReceiptDao.class);
+        public FormationService formationService(){
+            return new FormationServiceImpl();
         }
 
         @Bean
-        public TeamDao teamDao() {
-            return mock(TeamDao.class);
+        public EconomyService economyService(){
+            return new EconomyServiceImpl();
         }
 
         @Bean
