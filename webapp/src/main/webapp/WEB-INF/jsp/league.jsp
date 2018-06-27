@@ -7,6 +7,7 @@
   <jsp:attribute name="styles">
     <link rel="stylesheet" href="<c:url value="/assets/css/home.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/assets/css/match.css"/>"/>
+    <link rel="stylesheet" href="<c:url value="/assets/css/league.css"/>"/>
   </jsp:attribute>
   <jsp:body>
     <div class="animated fadeIn p-5">
@@ -14,12 +15,27 @@
         <div class="col-lg-6">
           <div class="card">
             <div class="card-header">
-              <strong class="card-title"><spring:message code="leagueInfo"/></strong>
+              <%--<strong class="card-title"><c:out value="${league.name}"/></strong>--%>
+              <div class="stat-widget-one">
+                <div class="stat-icon dib"><i class="ti-cup text-warning border-warning"></i></div>
+                <div class="stat-content dib">
+                  <div class="team-name"><c:out value="${league.name}"/></div>
+                </div>
+              </div>
             </div>
             <div class="card-body">
-              <div class="col-lg-2"><div class="stat-text"><c:out value="${league.name}"/></div></div>
-              <div class="col-lg-2"><div class="stat-text"><spring:message code="matchesPlayed"/> <c:out value="${matchesPlayed}"/></div></div>
-              <div class="col-lg-2"><div class="stat-text"><spring:message code="matchesToPlay"/> <c:out value="${matchesToPlay}"/></div></div>
+              <div class="weather-category twt-category m-0 p-0">
+                <ul class="m-0">
+                  <li>
+                    <h5><c:out value="${matchesPlayed}"/></h5>
+                    <spring:message code="matchesPlayed"/>
+                  </li>
+                  <li>
+                    <h5><c:out value="${matchesToPlay}"/></h5>
+                    <spring:message code="matchesToPlay"/>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
           <div class="card">
@@ -68,7 +84,7 @@
                 <tbody>
                 <c:forEach items="${teams}" var="team" varStatus="loop">
                   <tr>
-                    <th scope="row" class="match-position"><c:out value="${loop.index}"/></th>
+                    <th scope="row" class="match-position"><c:out value="${loop.index + 1}"/></th>
                     <td class="match-team"><c:out value="${team.key}"/></td>
                     <td class="match-points"><c:out value="${team.value}"/></td>
                   </tr>
