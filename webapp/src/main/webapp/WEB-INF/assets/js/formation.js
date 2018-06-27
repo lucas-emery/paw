@@ -51,6 +51,16 @@ function load() {
     document.getElementById("pen").value = document.getElementById("pen").options[0].value;
 
     showCurrentFormation(document.getElementById("formation").value);
+    var error = document.getElementById("error");
+    error.style.display = "none";
+
+
+    if(window.location.href.includes("error=true")){
+        error.style.display = "";
+    } else if (window.location.href.includes("error=false")){
+        var popup = jQuery('#staticModal');
+        popup.modal('show');
+    }
 }
 
 function getInitialValues() {

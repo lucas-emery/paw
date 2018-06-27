@@ -1,3 +1,4 @@
+
 ( function ( $ ) {
     var ctx = document.getElementById( "radarChart" );
     ctx.height = 160;

@@ -12,6 +12,8 @@
     <script src="<c:url value="/assets/js/playerInfo.js"/>"></script>
   </jsp:attribute>
   <jsp:body>
+
+
     <div class="animated fadeIn p-5">
       <div class="row">
         <div class="col-lg-6">

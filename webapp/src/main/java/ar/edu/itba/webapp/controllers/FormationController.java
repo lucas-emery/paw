@@ -10,6 +10,7 @@ import ar.edu.itba.model.User;
 import ar.edu.itba.model.utils.Point;
 import ar.edu.itba.webapp.form.FormationForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -84,8 +85,11 @@ public class FormationController extends Controller{
     @RequestMapping(value = "/processFormationForm", method = RequestMethod.POST)
     public ModelAndView processSurvey(@Valid @ModelAttribute("formationForm") FormationForm form, BindingResult result) {
 
+
         if (result.hasErrors()) {
-            return formation(form);
+            ModelAndView mav = new ModelAndView("redirect:/formation");
+            mav.addObject("error", true);
+            return mav;
         }
 
         User user = loggedUser();
@@ -131,12 +135,15 @@ public class FormationController extends Controller{
         if(formationService.isValid(formation)) {
             team.setFormation(formation);
             formationService.save(formation);
-        }
-        else {
-            return formation(form);
+        } else {
+            ModelAndView mav = new ModelAndView("redirect:/formation");
+            mav.addObject("error", true);
+            return mav;
         }
 
-        return new ModelAndView("redirect:/");
+        ModelAndView mav = new ModelAndView("redirect:/formation");
+        mav.addObject("error", false);
+        return mav;
     }
 
 }

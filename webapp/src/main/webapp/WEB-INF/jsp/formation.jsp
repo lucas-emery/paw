@@ -15,6 +15,22 @@
   <jsp:body>
     <c:url value="/formation" var="formationUrl"/>
     <c:url value="/processFormationForm" var="postPath"/>
+
+    <div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel"
+         aria-hidden="true" data-backdrop="static">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticModalLabel"><spring:message code="formationChange"/></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <div class="animated fadeIn p-5">
       <div class="row">
         <div class="col-6">
@@ -23,7 +39,8 @@
                 <div style="position: relative; left: 0; top: 0;">
                 <img src="../assets/img/soccerField.jpg"  class="formationImage"/>
 
-                    <form:form modelAttribute="formationForm" action="${postPath}" method="post">
+                    <form:form modelAttribute="formationForm" action="${postPath}" method="post"
+                               data-error="${error}" id="form">
 
                     <div class="formationContent">
                     <%-- Delanteros --%>
@@ -183,6 +200,12 @@
                         </c:forEach>
                       </form:select>
                     </div>
+                </div>
+
+                <br>
+
+                <div class="alert alert-danger" role="alert" id="error">
+                  <spring:message code="errorFormation"/>
                 </div>
 
                 <ul class="list-group list-group-flush">
@@ -361,7 +384,7 @@
 
                 <li class="list-group-item">
                    <span class="pull-right">
-                     <input type="submit" value="<spring:message code="save"/>" class="btn btn-light"/>
+                     <input type="submit" value="<spring:message code="save"/>" class="btn btn-light" id="submit"/>
                    </span>
                 </li>
                 </ul>
