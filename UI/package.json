@@ -24,7 +24,7 @@
     "bootstrap": "^4.3.1",
     "cli-color": "^1.4.0",
     "core-js": "^2.5.4",
-    "jquery": "^1.9.1",
+    "jquery": "^3.5.0",
     "json": "^9.0.6",
     "ng-dialog": "^1.4.0",
     "popper.js": "^1.14.7",
