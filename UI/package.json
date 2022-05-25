@@ -41,7 +41,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "bower": "^1.8.0",
-    "grunt": "^0.4.1",
+    "grunt": "^1.5.3",
     "grunt-autoprefixer": "^0.7.3",
     "grunt-bower-requirejs": "^1.1.0",
     "grunt-cli": "^1.2.0",
